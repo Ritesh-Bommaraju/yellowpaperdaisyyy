@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A little corner of the internet, for Mahi.">
+  <title>For Mahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=24">
+  <style>
+    /* Critical opening — works even if external CSS/JS is cached or fails */
+    @keyframes opening-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .opening__line {
+      opacity: 0;
+      animation: opening-in 0.8s ease forwards;
+    }
+    .opening__line:nth-child(1) { animation-delay: 0.4s; }
+    .opening__line:nth-child(2) { animation-delay: 1.4s; }
+    .opening__line:nth-child(3) { animation-delay: 2.4s; }
+    .opening__line:nth-child(4) { animation-delay: 3.4s; }
+    .opening__line:nth-child(5) { animation-delay: 4.4s; }
+    .opening-cat {
+      opacity: 0;
+      animation: opening-in 0.6s ease 5.4s forwards;
+    }
+    .opening__btn {
+      opacity: 0;
+      animation: opening-in 0.6s ease 6.2s forwards;
+      pointer-events: none;
+    }
+    .opening__btn.is-ready {
+      pointer-events: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .opening__line, .opening-cat, .opening__btn {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
+      .opening__btn { pointer-events: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient petals (subtle, JS-controlled) -->
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
+  <!-- Recurring corner cat -->
+  <button class="corner-cat" id="cornerCat" aria-label="Emotional support cat" hidden>
+    <svg viewBox="0 0 80 60" class="cat-svg cat-svg--small" aria-hidden="true">
+      <ellipse cx="40" cy="48" rx="22" ry="14" fill="#8B7355"/>
+      <circle cx="40" cy="28" r="18" fill="#A0896C"/>
+      <polygon points="22,18 18,4 30,14" fill="#A0896C"/>
+      <polygon points="58,18 62,4 50,14" fill="#A0896C"/>
+      <circle cx="33" cy="26" r="2.5" fill="#3D342B"/>
+      <circle cx="47" cy="26" r="2.5" fill="#3D342B"/>
+      <path d="M36 32 Q40 35 44 32" stroke="#3D342B" stroke-width="1.5" fill="none"/>
+      <line x1="18" y1="30" x2="8" y2="28" stroke="#A0896C" stroke-width="2"/>
+      <line x1="62" y1="30" x2="72" y2="28" stroke="#A0896C" stroke-width="2"/>
+    </svg>
+  </button>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- OPENING                                -->
+  <!-- ═══════════════════════════════════════ -->
+  <section class="section section--opening" id="opening" aria-label="Opening">
+    <div class="opening__inner">
+      <div class="sunflower sunflower--hero" id="heroSunflower" aria-hidden="true">
+        <svg viewBox="0 0 120 160" class="sunflower-svg">
+          <g class="sunflower-stem">
+            <path d="M60 80 Q58 110 60 150" stroke="#7A8B5E" stroke-width="3" fill="none"/>
+            <ellipse cx="52" cy="120" rx="12" ry="6" fill="#8B9A6B" transform="rotate(-30 52 120)"/>
+            <ellipse cx="68" cy="130" rx="10" ry="5" fill="#8B9A6B" transform="rotate(20 68 130)"/>
+          </g>
+          <g class="sunflower-head">
+            <g class="sunflower-petals">
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(0 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(30 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(60 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(90 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(120 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(150 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(180 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(210 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(240 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(270 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(300 60 60)"/>
+              <ellipse cx="60" cy="35" rx="8" ry="18" fill="#D4A84B" transform="rotate(330 60 60)"/>
+            </g>
+            <circle cx="60" cy="60" r="16" fill="#6B4F2A"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="opening__text" id="openingText">
+        <p class="opening__line reveal" data-delay="0">For Mahi.</p>
+        <p class="opening__line reveal" data-delay="1">There are probably easier ways to say sorry.</p>
+        <p class="opening__line reveal" data-delay="2">I just didn't want to choose the easy one this time.</p>
+        <p class="opening__line reveal" data-delay="3">So I made you a little place on the internet.</p>
+        <p class="opening__line reveal opening__line--pause" data-delay="4">There's a cat in it, obviously.</p>
+      </div>
+
+      <div class="opening-cat" id="openingCat" aria-hidden="true">
+        <svg viewBox="0 0 100 70" class="cat-svg cat-svg--walk">
+          <ellipse cx="50" cy="55" rx="28" ry="16" fill="#8B7355"/>
+          <circle cx="50" cy="32" r="22" fill="#A0896C"/>
+          <polygon points="28,20 24,2 38,16" fill="#A0896C"/>
+          <polygon points="72,20 76,2 62,16" fill="#A0896C"/>
+          <circle cx="40" cy="30" r="3" fill="#3D342B" class="cat-eye"/>
+          <circle cx="60" cy="30" r="3" fill="#3D342B" class="cat-eye"/>
+          <path d="M44 38 Q50 42 56 38" stroke="#3D342B" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+
+      <button class="btn btn--primary opening__btn" id="comeInBtn" aria-label="Enter the website">
+        come in →
+      </button>
+      <p class="opening__skip handwritten" id="openingSkip" hidden>tap anywhere to skip</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- MAIN CONTENT (revealed after opening)  -->
+  <!-- ═══════════════════════════════════════ -->
+  <main id="mainContent" hidden>
+
+    <!-- CAT INTRODUCTION -->
+    <section class="section section--cat" id="catIntro" aria-label="Cat introduction">
+      <div class="container">
+        <div class="cat-character" id="mainCat">
+          <svg viewBox="0 0 140 100" class="cat-svg cat-svg--large">
+            <ellipse cx="70" cy="78" rx="38" ry="20" fill="#8B7355"/>
+            <circle cx="70" cy="45" r="30" fill="#A0896C"/>
+            <polygon points="40,28 34,4 52,22" fill="#A0896C"/>
+            <polygon points="100,28 106,4 88,22" fill="#A0896C"/>
+            <ellipse cx="55" cy="42" rx="4" ry="5" fill="#3D342B" class="cat-eye cat-eye--left"/>
+            <ellipse cx="85" cy="42" rx="4" ry="5" fill="#3D342B" class="cat-eye cat-eye--right"/>
+            <path d="M60 54 Q70 60 80 54" stroke="#3D342B" stroke-width="2" fill="none"/>
+            <line x1="32" y1="48" x2="14" y2="44" stroke="#A0896C" stroke-width="2.5"/>
+            <line x1="108" y1="48" x2="126" y2="44" stroke="#A0896C" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Hi, Mahi.</h2>
+        <p class="body-text">I'm the emotional support cat.</p>
+        <p class="body-text">He said I'm here because apparently he needs supervision.</p>
+        <button class="btn btn--secondary" id="catOpinionBtn" aria-describedby="catOpinion">
+          What does the cat think?
+        </button>
+        <p class="handwritten cat-opinion" id="catOpinion" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- SERIOUS APOLOGY -->
+    <section class="section section--letter" id="apology" aria-label="Apology">
+      <div class="container container--narrow">
+        <article class="letter">
+          <h2 class="letter__heading">Okay. For real.</h2>
+          <p class="letter__lead">I hurt you.</p>
+          <p>I said something I shouldn't have said.</p>
+          <p>And I know that wasn't the only part of it.</p>
+          <p class="letter__emphasis">I was distant.<br>Selfish.<br>Neglectful.</p>
+          <p>You called me when I was drunk, and instead of making you feel safe, I made you worry.</p>
+          <p>The next day, I wasn't really there.</p>
+          <p>And then, when you were still waiting for me and caring about me, I called you while I was feeling low… and barely spoke.</p>
+          <p class="letter__emphasis">Five minutes.</p>
+          <p>Then I ended the call.</p>
+          <p>I understand why that felt like being ignored.</p>
+          <p>And the taunting, the selfishness, the way I acted… none of that becomes okay because I was feeling low.</p>
+          <p class="letter__highlight">You were trying to reach me, and I made you feel like you didn't matter.</p>
+          <p class="letter__sorry">I'm sorry, Mahi.</p>
+          <p>Not because I want this website to make everything okay. I know it can't.</p>
+          <p>I just wanted you to know that I see what I did, and I'm taking it seriously.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- YOU WERE RIGHT -->
+    <section class="section section--words-actions" id="wordsActions" aria-label="Words and actions">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">You were right about something</h2>
+        <div class="words-actions__content">
+          <p>You told me my <span class="word-highlight word-highlight--words" id="wordWords">words</span> are good.</p>
+          <p>But my <span class="word-highlight word-highlight--actions" id="wordActions">actions</span> don't match them.</p>
+          <p>And honestly?</p>
+          <p>That's the part that has stayed with me.</p>
+          <p>Because saying the right things is easy.</p>
+          <p>Being consistent when I'm tired, low, distracted, drunk, busy, or simply not in the mood to talk… that's where I actually have to show you who I am.</p>
+          <p class="words-actions__closing">I don't want to convince you with another paragraph.<br>I want to become someone whose actions make the paragraph unnecessary.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I SHOULD HAVE DONE — folded into apology; removed for pacing -->
+
+    <!-- GOA -->
+    <section class="section section--goa" id="goa" aria-label="Goa memory">
+      <div class="goa__sky" id="goaSky">
+        <div class="goa__starfield" id="goaStarfield" aria-hidden="true"></div>
+        <div class="goa__horizon" aria-hidden="true"></div>
+      </div>
+      <div class="goa__content" id="goaContent">
+        <p class="goa__date reveal-on-scroll">05 · 07 · 2026</p>
+        <h2 class="goa__place reveal-on-scroll">Goa</h2>
+        <div class="goa__narrative">
+          <p class="reveal-on-scroll">I saw you across the room.</p>
+          <p class="reveal-on-scroll goa__beautiful">You were beautiful.</p>
+          <p class="reveal-on-scroll">We had only met that day.</p>
+          <p class="reveal-on-scroll">But somehow, I knew I was going to remember it.</p>
+        </div>
+
+        <!-- Hand-drawn miniature map -->
+        <div class="goa-map reveal-on-scroll" id="goaMap" role="group" aria-label="Goa map — tap each location">
+          <svg class="goa-map__svg" viewBox="0 0 320 200" aria-hidden="true">
+            <path class="goa-map__path" d="M50 100 Q120 80 160 100 T270 100" fill="none" stroke="rgba(212,168,75,0.5)" stroke-width="2" stroke-dasharray="6 4"/>
+            <path class="goa-map__path goa-map__path--drive" d="M160 100 Q200 130 250 150" fill="none" stroke="rgba(196,164,164,0.4)" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <!-- Bar -->
+            <circle cx="50" cy="100" r="18" class="goa-map__dot" data-loc="bar"/>
+            <text x="50" y="75" class="goa-map__label" text-anchor="middle" data-place="bar">Bar High Five</text>
+            <!-- Cafe -->
+            <circle cx="160" cy="100" r="18" class="goa-map__dot" data-loc="cafe"/>
+            <text x="160" y="75" class="goa-map__label" text-anchor="middle" data-place="cafe">Cafe Sicily</text>
+            <!-- Hostel -->
+            <circle cx="270" cy="100" r="18" class="goa-map__dot" data-loc="hostel"/>
+            <text x="270" y="75" class="goa-map__label" text-anchor="middle">Hostel</text>
+            <!-- Drive marker -->
+            <circle cx="205" cy="125" r="10" class="goa-map__dot goa-map__dot--small" data-loc="drive"/>
+            <text x="205" y="155" class="goa-map__label goa-map__label--small" text-anchor="middle">the drive</text>
+          </svg>
+          <p class="goa-map__message handwritten" id="goaMapMessage" role="status" aria-live="polite">Tap a place on the map.</p>
+        </div>
+
+        <!-- Pictures of us -->
+        <div class="goa-photos reveal-on-scroll" id="goaPhotos">
+          <p class="goa-photos__heading handwritten">Pictures of us.</p>
+          <div class="goa-photos__grid" id="goaPhotosGrid"></div>
+        </div>
+
+        <figure class="goa-stars reveal-on-scroll" id="goaStarsFigure">
+          <div class="goa-stars__glow" aria-hidden="true"></div>
+          <div class="goa-stars__frame">
+            <img class="goa-stars__img" id="goaStarsImg" src="images/chapora-stars.png" alt="Star map of the sky over Chapora, Goa on 5 July 2026" loading="lazy" width="400" height="600">
+          </div>
+          <figcaption class="goa-stars__caption">
+            <p class="goa-stars__line handwritten">This is how the sky looked the day we met.</p>
+            <p class="goa-stars__meta">Chapora · 05 July 2026</p>
+          </figcaption>
+        </figure>
+
+        <div class="goa__footer reveal-on-scroll">
+          <p class="goa__footer-date">05 July 2026</p>
+          <p class="goa__footer-label">One day. One meeting. One memory I don't think I'll forget.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAHI'S LITTLE UNIVERSE -->
+    <section class="section section--universe" id="universe" aria-label="Mahi's little universe">
+      <div class="container">
+        <h2 class="section-title section-title--center">Mahi's little universe</h2>
+        <p class="section-subtitle section-subtitle--center">Her tastes. Her things. Tap one.</p>
+        <div class="universe-constellation" id="universeGrid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- Note modal for universe items -->
+    <dialog class="note-dialog note-dialog--scrap" id="noteDialog" aria-labelledby="noteDialogTitle">
+      <button class="note-dialog__close" type="button" aria-label="Close note">&times;</button>
+      <div class="note-dialog__emoji" id="noteDialogEmoji" aria-hidden="true"></div>
+      <h3 class="note-dialog__title" id="noteDialogTitle"></h3>
+      <p class="note-dialog__text handwritten" id="noteDialogText"></p>
+    </dialog>
+
+    <!-- MAHI MUSEUM -->
+    <section class="section section--museum" id="museum" aria-label="Mahi Museum">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">Mahi Museum</h2>
+        <p class="section-subtitle section-subtitle--center museum-subtitle">A collection of tiny things I've noticed about you.</p>
+        <div class="museum-gallery" id="museumGrid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- THINGS I SECRETLY LOVE -->
+    <section class="section section--loves" id="secretLoves" aria-label="Things I secretly love about you">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">Things I secretly love about you</h2>
+        <p class="section-subtitle section-subtitle--center loves-subtitle">Not things I've noticed. Things that make me feel something.</p>
+        <ul class="loves-scrapbook" id="lovesList"></ul>
+      </div>
+    </section>
+
+    <!-- OUR SOUNDTRACK -->
+    <section class="section section--records" id="music" aria-label="Our soundtrack">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">Our Soundtrack</h2>
+        <p class="section-subtitle section-subtitle--center">A little record collection.</p>
+        <div class="records" id="recordsCollection"></div>
+        <div class="records-player" id="recordsPlayer">
+          <div class="records-player__disc" id="vinylDisc" aria-hidden="true">
+            <div class="records-player__disc-inner"></div>
+          </div>
+          <div class="records-player__info">
+            <p class="records-player__now" id="nowPlayingLabel">Select a record</p>
+            <p class="records-player__title" id="songTitle">—</p>
+            <p class="records-player__artist" id="songArtist">—</p>
+            <div class="records-player__waveform" id="waveform" aria-hidden="true"></div>
+            <p class="records-player__notice" id="audioNotice" hidden></p>
+          </div>
+          <div class="records-player__spotify" id="spotifyEmbedWrap" hidden>
+            <iframe
+              id="spotifyEmbed"
+              title="Spotify player"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <a class="records-player__spotify-link" id="spotifyOpenLink" href="#" target="_blank" rel="noopener noreferrer" hidden>
+            Open in Spotify ↗
+          </a>
+          <button class="btn btn--secondary records-player__play" id="playPause" aria-label="Play or pause">
+            <span id="playIcon">▶</span> play
+          </button>
+        </div>
+        <audio id="audioElement" preload="metadata"></audio>
+      </div>
+    </section>
+
+    <!-- LITTLE THINGS I WANT TO DO WITH YOU -->
+    <section class="section section--moments" id="thingsToDo" aria-label="Little things I want to do with you">
+      <div class="container">
+        <h2 class="section-title section-title--center">Little things I want to do with you</h2>
+        <p class="section-subtitle section-subtitle--center">Not big promises. Just little moments I haven't had with you yet.</p>
+        <div class="postcards" id="littleMomentsGrid"></div>
+        <div class="postcard-bridge" id="littleMomentsClosing"></div>
+      </div>
+    </section>
+
+    <!-- BEHAVIOUR PROMISES -->
+    <section class="section section--promises" id="promises" aria-label="Things I can actually promise">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">Things I can actually promise</h2>
+        <p class="section-subtitle section-subtitle--center">Not that I'll never hurt you again. Just how I'll try to show up.</p>
+        <ul class="promises-list" id="promisesList"></ul>
+      </div>
+    </section>
+
+    <!-- TEN STEPS / MILLION STEPS — flows from little moments -->
+    <section class="section section--steps section--steps-bridge" id="millionSteps" aria-label="Steps">
+      <div class="steps__dark">
+        <div class="steps__path-container">
+          <svg class="steps__path-svg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <path class="steps__path-line" d="M200 50 Q180 200 200 350 Q220 500 200 650 Q190 750 200 800" fill="none" stroke="rgba(212,168,75,0.3)" stroke-width="2"/>
+          </svg>
+          <div class="steps__footprints-back" id="footprintsBack" aria-hidden="true"></div>
+          <div class="steps__footprints-forward" id="footprintsForward" aria-hidden="true"></div>
+        </div>
+
+        <div class="steps__narrative container container--narrow" id="stepsNarrative">
+          <p class="steps__line reveal-on-scroll">You told me you've taken ten steps back from whatever this is between us.</p>
+          <p class="steps__line reveal-on-scroll">I understand why.</p>
+          <p class="steps__line reveal-on-scroll">And I'm not going to ask you to take those ten steps back just because I'm sorry.</p>
+          <p class="steps__line reveal-on-scroll">I know I've given you reasons to step away, and I know how disappointed you are in me.</p>
+        </div>
+
+        <div class="steps__transition reveal-on-scroll">
+          <p>But if, somewhere in you, there's still a part that's willing to walk…</p>
+        </div>
+
+        <div class="steps__peak container container--narrow">
+          <p class="steps__peak-line reveal-on-scroll">I'll walk with you.</p>
+          <p class="steps__peak-line reveal-on-scroll steps__peak-number">Not ten steps.</p>
+          <p class="steps__peak-line reveal-on-scroll steps__peak-number">Not a hundred.</p>
+          <p class="steps__peak-line reveal-on-scroll steps__peak-number steps__peak-number--million">A million.</p>
+        </div>
+
+        <article class="steps__letter container container--narrow reveal-on-scroll" id="stepsLetter">
+          <p>You told me you've taken ten steps back from whatever this is between us.</p>
+          <p>I understand why.</p>
+          <p>And I'm not going to ask you to take those ten steps back just because I'm sorry. I know I've given you reasons to step away, and I know how disappointed you are in me.</p>
+          <p>But if, somewhere in you, there's still a part that's willing to walk…</p>
+          <p class="steps__letter-emphasis">I'll walk with you.</p>
+          <p>Not ten steps.<br>Not a hundred.<br>A million.</p>
+          <p>And I don't mean that as some dramatic promise that sounds beautiful tonight and disappears tomorrow.</p>
+          <p>I mean I'll take them one at a time, with you.</p>
+          <p>Because you matter to me, Mahi.<br>More than my actions lately have made you feel.</p>
+          <p>So if you need to walk slowly, I'll walk slowly.<br>If you need to stop, I'll stop.<br>If you need space, I'll give you space.</p>
+          <p>And if you decide you don't want to walk this road with me anymore, I'll respect that too.</p>
+          <p class="steps__letter-closing">I just want you to know that if you are willing to take even one step towards me again,<br>I'll be there for the next million.</p>
+        </article>
+
+        <div class="steps__path-end" aria-hidden="true"></div>
+
+        <!-- Take the first step -->
+        <div class="steps__interactive container container--narrow" id="firstStepSection">
+          <button class="btn btn--primary steps__first-btn" id="firstStepBtn" type="button">
+            take the first step
+          </button>
+          <div class="steps__counter" id="stepCounter" hidden aria-live="polite">
+            <span class="steps__counter-num" id="stepCounterNum">0</span>
+            <span class="steps__counter-label">steps</span>
+          </div>
+          <div class="steps__interactive-feet" id="interactiveFeet" aria-hidden="true"></div>
+          <p class="steps__interactive-msg" id="firstStepMsg" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NO PRESSURE -->
+    <section class="section section--quiet" id="noPressure" aria-label="No pressure">
+      <div class="container container--narrow">
+        <h2 class="section-title section-title--center">One thing I really want you to know.</h2>
+        <div class="quiet__content">
+          <p>I don't want this website to become another way of asking something from you.</p>
+          <p>You don't owe me a quick answer, a smile, forgiveness, or anything at all because I made this.</p>
+          <p>I know an apology doesn't undo what happened.</p>
+          <p>The only thing that can make an apology meaningful is what I do after saying it.</p>
+          <p class="quiet__space">So take whatever space or time you need.</p>
+          <p class="quiet__mean">I mean that.</p>
+          <p class="quiet__sorry">I'm sorry. Truly.</p>
+        </div>
+        <!-- Hidden forbidden cat — tiny paw, no label -->
+        <button class="forbidden-paw" id="forbiddenPaw" type="button" aria-label="Paw print" title="">
+          <svg viewBox="0 0 32 32" aria-hidden="true">
+            <ellipse cx="16" cy="22" rx="7" ry="5" fill="currentColor"/>
+            <circle cx="9" cy="12" r="3.5" fill="currentColor"/>
+            <circle cx="16" cy="9" r="3.5" fill="currentColor"/>
+            <circle cx="23" cy="12" r="3.5" fill="currentColor"/>
+            <circle cx="11" cy="17" r="2.8" fill="currentColor"/>
+            <circle cx="21" cy="17" r="2.8" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- FINAL LETTER -->
+    <section class="section section--final" id="finalLetter" aria-label="Final letter">
+      <div class="container container--narrow">
+        <div class="final__scene">
+          <div class="sunflower sunflower--final" aria-hidden="true">
+            <svg viewBox="0 0 100 140" class="sunflower-svg sunflower-svg--small">
+              <path d="M50 70 Q48 100 50 130" stroke="#7A8B5E" stroke-width="2.5" fill="none"/>
+              <g class="sunflower-head">
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(0 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(45 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(90 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(135 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(180 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(225 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(270 50 50)"/>
+                <ellipse cx="50" cy="30" rx="6" ry="14" fill="#D4A84B" transform="rotate(315 50 50)"/>
+                <circle cx="50" cy="50" r="12" fill="#6B4F2A"/>
+              </g>
+            </svg>
+          </div>
+          <svg viewBox="0 0 80 40" class="cat-svg cat-svg--sleeping" aria-hidden="true">
+            <ellipse cx="40" cy="30" rx="20" ry="10" fill="#A0896C"/>
+            <circle cx="40" cy="18" r="14" fill="#A0896C"/>
+            <path d="M30 16 Q28 12 32 14" stroke="#3D342B" stroke-width="1" fill="none"/>
+            <path d="M50 16 Q52 12 48 14" stroke="#3D342B" stroke-width="1" fill="none"/>
+            <text x="55" y="8" class="cat-zzz" font-size="8" fill="#8B7355">z z z</text>
+          </svg>
+        </div>
+
+        <article class="letter letter--final">
+          <h2 class="letter__heading">One last thing.</h2>
+          <p>Some things can't be fixed with a website. I know that.</p>
+          <p>But I could at least make you one little corner of the internet and fill it with a few things I should have said out loud.</p>
+          <p>The girl I saw across that room in Goa. Holding your hand. The way you tell me about your day — even when I wasn't listening properly.</p>
+          <p>And somewhere along the way, someone who cared about me started feeling neglected by me.</p>
+          <p class="letter__highlight">I don't want to ignore that.</p>
+          <p>Thank you for letting me into your life.</p>
+          <p>I'm sorry I haven't always treated that with the care it deserves.</p>
+          <p class="letter__sign">— me</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tiny secret sunflower — doesn't look like a button -->
+    <button class="secret-sunflower" id="secretSunflower" aria-label="Sunflower" hidden>
+      <svg viewBox="0 0 40 50" aria-hidden="true">
+        <ellipse cx="20" cy="12" rx="4" ry="9" fill="#D4A84B" transform="rotate(0 20 25)"/>
+        <ellipse cx="20" cy="12" rx="4" ry="9" fill="#D4A84B" transform="rotate(45 20 25)"/>
+        <ellipse cx="20" cy="12" rx="4" ry="9" fill="#D4A84B" transform="rotate(90 20 25)"/>
+        <ellipse cx="20" cy="12" rx="4" ry="9" fill="#D4A84B" transform="rotate(135 20 25)"/>
+        <circle cx="20" cy="25" r="7" fill="#6B4F2A"/>
+        <path d="M20 32 Q19 42 20 48" stroke="#7A8B5E" stroke-width="1.5" fill="none"/>
+      </svg>
+    </button>
+
+  </main>
+
+  <!-- Sunflower 7-click easter egg -->
+  <dialog class="easter-dialog" id="sunflowerEaster">
+    <button class="easter-dialog__close" type="button" aria-label="Close">&times;</button>
+    <p class="handwritten easter-dialog__title">You found it.</p>
+    <p>I was going to make this difficult.</p>
+    <p>Then I remembered you're smarter than me.</p>
+  </dialog>
+
+  <!-- Forbidden cat — secret, not linked to main cat button -->
+  <div class="forbidden-cat" id="forbiddenCat" hidden aria-hidden="true">
+    <div class="forbidden-cat__dark">
+      <div class="forbidden-cat__creature" id="forbiddenCatCreature" aria-hidden="true">
+        <svg viewBox="0 0 80 60" class="cat-svg">
+          <ellipse cx="40" cy="48" rx="22" ry="14" fill="#A0896C"/>
+          <circle cx="40" cy="28" r="18" fill="#A0896C"/>
+          <ellipse cx="33" cy="26" r="2.5" ry="3" fill="#3D342B"/>
+          <ellipse cx="47" cy="26" r="2.5" ry="3" fill="#3D342B"/>
+          <path d="M36 32 Q40 35 44 32" stroke="#3D342B" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="forbidden-cat__text" id="forbiddenCatText"></div>
+      <div class="forbidden-cat__feet" id="forbiddenCatFeet" aria-hidden="true">🐾</div>
+    </div>
+  </div>
+
+  <!-- Secret Ending — night sky -->
+  <div class="secret-ending" id="secretEnding" hidden aria-hidden="true">
+    <div class="secret-ending__sky">
+      <div class="secret-ending__stars" aria-hidden="true"></div>
+      <div class="secret-ending__cat" id="secretEndingCat" aria-hidden="true">
+        <svg viewBox="0 0 120 80" class="cat-svg">
+          <ellipse cx="60" cy="65" rx="35" ry="18" fill="#A0896C"/>
+          <circle cx="60" cy="38" r="28" fill="#A0896C"/>
+          <ellipse cx="48" cy="35" rx="3" ry="4" fill="#3D342B"/>
+          <ellipse cx="72" cy="35" rx="3" ry="4" fill="#3D342B"/>
+        </svg>
+      </div>
+      <div class="secret-ending__text" id="secretEndingText"></div>
+      <button class="secret-ending__exit" id="secretEndingExit" type="button" aria-label="Close">×</button>
+    </div>
+  </div>
+
+  <!-- Old envelope kept hidden for compatibility -->
+  <dialog class="envelope-dialog" id="envelopeDialog" hidden aria-hidden="true"></dialog>
+
+  <script src="script.js?v=24"></script>
+</body>
+</html>
